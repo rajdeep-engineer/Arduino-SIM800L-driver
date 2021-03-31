@@ -420,6 +420,7 @@ uint16_t SIM800L::initiateHTTP(const char* url, const char* headers) {
   }
 
   // Send HTTPSSL command only if the version is greater or equals to 14
+  /*
   if(isSupportSSL) {
     // HTTP or HTTPS
     if(strIndex(url, "https://") == 0) {
@@ -436,7 +437,7 @@ uint16_t SIM800L::initiateHTTP(const char* url, const char* headers) {
       }
     }
   }
-
+*/
   return 0;
 }
 
