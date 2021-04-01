@@ -135,7 +135,7 @@ uint16_t SIM800L::doPost(const char* url, const char* headers, const char* conte
   sendCommand_P(AT_CMD_HTTPPARA_CONTENT, contentType);
   if(!readResponseCheckAnswer_P(DEFAULT_TIMEOUT, AT_RSP_OK)) {
     if(enableDebug) debugStream->println(F("SIM800L : doPost() - Unable to define the content type"));
-    return 702;
+    return 7021; //702
   }
 
   // Prepare to send the payload
@@ -383,14 +383,14 @@ uint16_t SIM800L::initiateHTTP(const char* url, const char* headers) {
   sendCommand_P(AT_CMD_HTTPPARA_CID);
   if(!readResponseCheckAnswer_P(DEFAULT_TIMEOUT, AT_RSP_OK)) {
     if(enableDebug) debugStream->println(F("SIM800L : initiateHTTP() - Unable to define bearer"));
-    return 702;
+    return 7022;  //702
   }
 
   // Define URL to look for
   sendCommand_P(AT_CMD_HTTPPARA_URL, url);
   if(!readResponseCheckAnswer_P(DEFAULT_TIMEOUT, AT_RSP_OK)) {
     if(enableDebug) debugStream->println(F("SIM800L : initiateHTTP() - Unable to define the URL"));
-    return 702;
+    return 7023;  //702
   }
 
   // Set Headers
@@ -398,7 +398,7 @@ uint16_t SIM800L::initiateHTTP(const char* url, const char* headers) {
     sendCommand_P(AT_CMD_HTTPPARA_USERDATA, headers);
     if(!readResponseCheckAnswer_P(DEFAULT_TIMEOUT, AT_RSP_OK)) {
       if(enableDebug) debugStream->println(F("SIM800L : initiateHTTP() - Unable to define Headers"));
-      return 702;
+      return 7024; //702
     }
   }
 
@@ -420,24 +420,24 @@ uint16_t SIM800L::initiateHTTP(const char* url, const char* headers) {
   }
 
   // Send HTTPSSL command only if the version is greater or equals to 14
-  /*
+  
   if(isSupportSSL) {
     // HTTP or HTTPS
     if(strIndex(url, "https://") == 0) {
       sendCommand_P(AT_CMD_HTTPSSL_Y);
       if(!readResponseCheckAnswer_P(DEFAULT_TIMEOUT, AT_RSP_OK)) {
         if(enableDebug) debugStream->println(F("SIM800L : initiateHTTP() - Unable to switch to HTTPS"));
-        return 702;
+        return 7025; //702
       }
     } else {
       sendCommand_P(AT_CMD_HTTPSSL_N);
       if(!readResponseCheckAnswer_P(DEFAULT_TIMEOUT, AT_RSP_OK)) {
         if(enableDebug) debugStream->println(F("SIM800L : initiateHTTP() - Unable to switch to HTTP"));
-        return 702;
+        return 7026; //702
       }
     }
   }
-*/
+
   return 0;
 }
 
